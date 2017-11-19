@@ -1,0 +1,30 @@
+class HappyFace {
+  + {static} void main(String[] args)
+}
+class Player {
+  - String name
+  - int winCount
+  + Direction offense()
+  + Direction defense()
+  + void notifyWin()
+  + int getWinCount()
+}
+class JadgementMan {
+  - {static} final int GAME_MAX_COUNT
+  - Player firstPlayer
+  - Player lastPlayer
+  - void gameStart()
+  - void jadge()
+
+}
+interface AI {
+  Direction decideAttackAction()
+  Direction decideDefenseAction()
+}
+HappyFace -> Player
+HappyFace -> JadgementMan
+Player o-- AI
+JadgementMan <|-- Player
+AI <|-- UpDownAI
+AI <|-- UpperAI
+AI <|-- TurnAI
