@@ -1,16 +1,14 @@
 package happyface;
 
-public class Player {
+abstract public class Player {
 	private AI ai;
-	private String name;
-	private int winCount = 0;
-
-	public Player(AI ai, String name) {
-		super();
-		this.ai = ai;
-		this.name = name;		this.winCount = 0;
+	private int winCount = 0;	
+	private Profile profile;
+	
+	public Player() {
+		 profile=createProfile();
 	}
-
+	
 	public Direction offense() {
 		return ai.decideAttackAction();
 	}
@@ -29,8 +27,9 @@ public class Player {
 	}
 	
 	public String getName() {
-		return name;
+		return profile.getName();
 	}
 	
-	
+	abstract protected Profile createProfile();
+	abstract protected AI createAi();
 }
