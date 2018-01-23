@@ -1,11 +1,11 @@
 package happyface;
 
-public class JadgementMan {
+public class JudgementMan {
 	private static final int GAME_MAX_COUNT = 10;
 	private Player firstPlayer;
 	private Player lastPlayer;
-	
-	public JadgementMan(Player firstPlayer, Player lastPlayer) {
+
+	public JudgementMan(Player firstPlayer, Player lastPlayer) {
 		super();
 		this.firstPlayer = firstPlayer;
 		this.lastPlayer = lastPlayer;
@@ -22,11 +22,11 @@ public class JadgementMan {
 
 	}
 
-	public void jadge(){
+	public void judge(){
 		System.out.println(String.format("%sの勝利数: %d", firstPlayer.getName(), firstPlayer.getWinCount()));
 		System.out.println(String.format("%sの勝利数: %d", lastPlayer.getName(), lastPlayer.getWinCount()));
 
-		Player winner = jadgeWinner(firstPlayer, lastPlayer);
+		Player winner = judgeWinner(firstPlayer, lastPlayer);
 
 		if (winner == null) {
 			System.out.println("引き分けです！");
@@ -35,7 +35,7 @@ public class JadgementMan {
 		}
 
 	}
-	
+
 	private void battle(Player firstPlayer, Player lastPlayer) {
 		System.out.println("あっちむいてホイ！");
 		if (attack(firstPlayer, lastPlayer)) {
@@ -57,7 +57,7 @@ public class JadgementMan {
 		return false;
 	}
 
-	private Player jadgeWinner(Player firstPlayer, Player lastPlayer) {
+	private Player judgeWinner(Player firstPlayer, Player lastPlayer) {
 		if (firstPlayer.getWinCount() == lastPlayer.getWinCount()) {
 			return null;
 		} else if (firstPlayer.getWinCount() > lastPlayer.getWinCount()) {
