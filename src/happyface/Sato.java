@@ -6,7 +6,7 @@ public class Sato extends Player {
 	protected Profile createProfile() {
 		Profile profile = new Profile();
 		profile.setAge(18);
-		profile.setName("sato");
+		profile.setName("佐藤");
 		profile.setSex(Sex.WOMAN);
 		return profile;
 	}
