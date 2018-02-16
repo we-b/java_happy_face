@@ -1,18 +1,44 @@
 package happyface;
 
-public class TurnAI implements AI {
-	private Direction direction = Direction.DOWN;
+import java.util.Random;
+
+public class RandomAI implements AI {
+	private Direction direction;
 
 	@Override
 	public Direction decideAttackAction() {
+		decideAction();
 		direction = getNextDirection(direction);
 		return direction;
 	}
 
 	@Override
 	public Direction decideDefenseAction() {
+		decideAction();
 		direction = getNextDirection(direction);
 		return direction;
+	}
+
+	public void decideAction() {
+		Random rnd = new Random();
+		int num = rnd.nextInt(4);
+		
+		switch (num) {
+		case 0:
+			this.direction = Direction.DOWN;
+			break;
+		case 1:
+			this.direction = Direction.UP;
+			break;
+		case 2:
+			this.direction = Direction.LEFT;
+			break;
+		case 3:
+			this.direction = Direction.RIGHT;
+			break;
+		default:
+			this.direction = Direction.UP;
+		}
 	}
 
 	private Direction getNextDirection(Direction preDirection) {
@@ -30,4 +56,3 @@ public class TurnAI implements AI {
 		}
 	}
 }
-
