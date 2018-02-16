@@ -1,0 +1,77 @@
+title あっちむいてホイ
+hide footbox
+
+actor ユーザー as user
+participant HappyFace
+participant JadgementMan
+participant firstPlayer <<Player>>
+participant firstPlayerAI <<AI>>
+participant lastPlayer <<Player>>
+participant lastPlayerAI <<AI>>
+
+user -> HappyFace : main()
+activate HappyFace
+create firstPlayerAI
+HappyFace -> firstPlayerAI : <<new>>
+create firstPlayer
+HappyFace -> firstPlayer : <<new>>
+create lastPlayerAI
+HappyFace -> lastPlayerAI : <<new>>
+create lastPlayer
+HappyFace -> lastPlayer : <<new>>
+create JadgementMan
+HappyFace -> JadgementMan : <<new>>
+HappyFace -> JadgementMan : gameStart()
+activate JadgementMan
+loop 10回勝負
+  JadgementMan -> firstPlayer : offense()
+  activate firstPlayer
+  firstPlayer -> firstPlayerAI : decideAttackAction()
+  activate firstPlayerAI
+  firstPlayer <-- firstPlayerAI :
+  deactivate firstPlayerAI
+  JadgementMan <-- firstPlayer :
+  deactivate firstPlayer
+  JadgementMan -> lastPlayer : defense()
+  activate lastPlayer
+  lastPlayer -> lastPlayerAI : decideAttackAction()
+  activate lastPlayerAI
+  lastPlayer <-- lastPlayerAI :
+  deactivate lastPlayerAI
+  JadgementMan <-- lastPlayer
+  deactivate lastPlayer
+  alt 先攻の勝利
+      JadgementMan -> firstPlayer: notifyWin()
+  end
+  JadgementMan -> lastPlayer : offense()
+  activate lastPlayer
+  lastPlayer -> lastPlayerAI : decideAttackAction()
+  activate lastPlayerAI
+  lastPlayer <-- lastPlayerAI :
+  deactivate lastPlayerAI
+  JadgementMan <-- lastPlayer :
+  deactivate lastPlayer
+  JadgementMan -> firstPlayer : defense()
+  activate firstPlayer
+  firstPlayer -> firstPlayerAI : decideAttackAction()
+  activate firstPlayerAI
+  firstPlayer <-- firstPlayerAI :
+  deactivate firstPlayerAI
+  JadgementMan <-- firstPlayer
+  deactivate firstPlayer
+  alt 後攻の勝利
+      JadgementMan -> lastPlayer: notifyWin()
+  end
+end
+HappyFace <-- JadgementMan
+deactivate JadgementMan
+
+HappyFace -> JadgementMan : jadge()
+activate JadgementMan
+JadgementMan -> firstPlayer : getWinCount()
+JadgementMan -> lastPlayer : getWinCount()
+alt 先攻の勝利
+    JadgementMan -> firstPlayer: getName()
+else 後攻の勝利
+    JadgementMan -> lastPlayer: getName()
+end

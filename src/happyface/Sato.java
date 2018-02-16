@@ -13,7 +13,7 @@ public class Sato extends Player {
 
 	@Override
 	protected AI createAi() {
-		return new TurnAI();
+		return new RandomAI();
 	}
 
 }
